@@ -1,3 +1,4 @@
+#include <windows.h>
 #include <iostream>
 #include <string>
 #include <regex>
@@ -44,10 +45,13 @@ void validarCorreo(const string& correo)
 
 int main()
 {
+    SetConsoleOutputCP(CP_UTF8);
+    SetConsoleCP(CP_UTF8);
+    
     string nueva_edad;
     string nuevo_correo;
 
-    cout << "---> Validación de EDAD y CORREO.";
+    cout << "---> Validación de EDAD y CORREO.\n\n";
 
     try
     {
@@ -59,7 +63,7 @@ int main()
         getline(cin, nuevo_correo);
         validarCorreo(nuevo_correo);
 
-        cout << "¡Validación exitosa!\n--> Edad :" << edad << endl;
+        cout << "\n¡Validación exitosa!\n--> Edad :" << edad << endl;
         cout << "--> Correo : " << nuevo_correo << endl;
 
     }
