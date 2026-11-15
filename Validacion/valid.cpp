@@ -32,5 +32,10 @@ int validarEdad(const string& num)
 
 void validarCorreo(const string& correo)
 {
-    cout << "a";
+    regex patron(R"(^[a-zA-Z0-9._-+%])+@[a-ZA-Z0-9.-]+\.[a-ZA-Z]{2,}$)");
+
+    if (!regex_match(correo, patron))
+    {
+        throw invalid_argument("Su correo no es válido.");
+    }
 }
