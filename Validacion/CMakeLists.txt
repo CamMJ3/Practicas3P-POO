@@ -1,0 +1,1 @@
+add_executable(validacion valid.cpp)

@@ -26,16 +26,45 @@ int validarEdad(const string& num)
     }
     catch(const invalid_argument& e)
     {
-        throw invalid_argument("Su edad no contiene números.")
+        throw invalid_argument("Su edad no contiene números.");
     }
 }
 
 void validarCorreo(const string& correo)
 {
-    regex patron(R"(^[a-zA-Z0-9._-+%])+@[a-ZA-Z0-9.-]+\.[a-ZA-Z]{2,}$)");
+    regex patron(R"(^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$)");
 
     if (!regex_match(correo, patron))
     {
         throw invalid_argument("Su correo no es válido.");
+    }
+}
+
+//////////////////////////////////////////////////////////////
+
+int main()
+{
+    string nueva_edad;
+    string nuevo_correo;
+
+    cout << "---> Validación de EDAD y CORREO.";
+
+    try
+    {
+        cout << "Tu edad es : ";
+        getline(cin, nueva_edad);
+        int edad = validarEdad(nueva_edad);
+
+        cout << "Tu correo es : ";
+        getline(cin, nuevo_correo);
+        validarCorreo(nuevo_correo);
+
+        cout << "¡Validación exitosa!\n--> Edad :" << edad << endl;
+        cout << "--> Correo : " << nuevo_correo << endl;
+
+    }
+    catch(const exception& e)
+    {
+        cerr << e.what() << '\n';
     }
 }

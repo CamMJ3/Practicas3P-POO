@@ -1,0 +1,51 @@
+
+# ==========================================
+# CMake
+# ==========================================
+
+# Directorios de compilación
+build/
+cmake-build-*/
+
+# Archivos generados por CMake
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+compile_commands.json
+Makefile
+build.ninja
+.ninja_deps
+.ninja_log
+
+# ==========================================
+# Visual Studio / MSVC
+# ==========================================
+
+.vs/
+*.sln
+*.vcxproj
+*.vcxproj.filters
+*.vcxproj.user
+
+# Archivos compilados
+*.obj
+*.o
+*.exe
+*.dll
+*.lib
+*.pdb
+*.ilk
+*.exp
+
+# ==========================================
+# VS Code
+# ==========================================
+
+.vscode/
+
+# ==========================================
+# Sistema operativo
+# ==========================================
+
+.DS_Store
+Thumbs.db
