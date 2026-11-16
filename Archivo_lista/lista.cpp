@@ -26,7 +26,21 @@ void guardarTareas(const vector<string>& deberes)
 
 void leerTareas()
 {
-    cout << "chanclas";
+    ifstream archivo("pendientes.txt");
+
+    if (!archivo.is_open())
+    {
+        throw runtime_error("No se ha creado el archivo.");
+    }
+
+    string tarea;
+    while (getline(archivo, tarea))
+    {
+        cout << "--> " << tarea << "\n";
+    }
+
+    archivo.close();
+
 }
 
 //////////////////////////////////////////////////////////////
@@ -39,4 +53,21 @@ int main()
         "Alimentar a mis perros", "Acomodar la cama",
         "Limpiar la cocina"
     };
+
+    try
+    {
+        cout << "_-_- Guardando deberes...\n";
+        guardarTareas(deberes);
+        cout << "\n¡Se logró guardar la lista!";
+
+        cout << "_-_- Leyendo deberes...\n";
+        leerTareas();
+        cout << "\n¡Se logró leer la lista!";
+
+    }
+    catch(const exception& e)
+    {
+        cerr << e.what() << '\n';
+    }
+    
 }
