@@ -47,6 +47,9 @@ void leerTareas()
 
 int main()
 {
+    SetConsoleOutputCP(CP_UTF8);
+    SetConsoleCP(CP_UTF8);
+    
     vector<string> deberes = 
     {
         "Lavar los trastes", "Trapear el suelo",
@@ -58,9 +61,9 @@ int main()
     {
         cout << "_-_- Guardando deberes...\n";
         guardarTareas(deberes);
-        cout << "\n¡Se logró guardar la lista!";
+        cout << "\n¡Se logró guardar la lista!\n\n";
 
-        cout << "_-_- Leyendo deberes...\n";
+        cout << "_-_- Leyendo deberes...\n\n";
         leerTareas();
         cout << "\n¡Se logró leer la lista!";
 

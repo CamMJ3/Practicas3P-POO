@@ -1,0 +1,1 @@
+add_executable(archivo_lista lista.cpp)
