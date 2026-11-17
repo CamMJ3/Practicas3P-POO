@@ -2,6 +2,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <stdexcept>
 #include <nlohmann/json.hpp>
 
 using namespace std;
@@ -29,9 +30,43 @@ json calcIngresos(const json& ventas)
     return productos;
 }
 
-json menorIngreso(const json& productos);
+json menorIngreso(const json& productos)
+{
+    if (productos.empty())
+    {
+        throw invalid_argument("No se han identificado productos.");
+    }
 
-json mayorIngreso(const json& productos);
+    json menor = productos[0];
+    for (const auto& producto : productos)
+    {
+        if (producto["ganancia_total"] < menor["ganancia_total"])
+        {
+            menor = producto;
+        }
+    }
+
+    return menor;
+}
+
+json mayorIngreso(const json& productos)
+{
+    if (productos.empty())
+    {
+        throw invalid_argument("No se han identificado productos.");
+    }
+
+    json mayor = productos[0];
+    for (const auto& producto : productos)
+    {
+        if (producto["ganancia_total"] > mayor["ganancia_total"])
+        {
+            mayor = producto;
+        }
+    }
+
+    return mayor;
+}
 
 json reporte(const json& ventas, const json& productos);
 
