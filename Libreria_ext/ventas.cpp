@@ -68,15 +68,20 @@ json mayorIngreso(const json& productos)
     return mayor;
 }
 
-void reporte(const json& ventas, const json& productos)
+json reporte(const json& ventas, const json& productos)
 {
+    if (productos.empty())
+    {
+        throw invalid_argument("No se han identificado productos.");
+    }
+
     int total_semanal = 0;
     int unidades_total = 0;
 
     for (const auto& producto : productos)
     {
-        total_semanal += producto["ganancia.total"];
-        unidades_total += producto["cantidad"];
+        total_semanal += producto["ganancia.total"].get<int>();
+        unidades_total += producto["cantidad"].get<int>();
     }
 
     json mayor = mayorIngreso(productos);
@@ -91,21 +96,37 @@ void reporte(const json& ventas, const json& productos)
         {"producto_menos_ingreso", menor},
         {"productos", productos}
     };
+
+    return reporte;
 }
 
 int main()
 {
     SetConsoleOutputCP(CP_UTF8);
     SetConsoleCP(CP_UTF8);
-    
-    vector<json> ventas = json::parse(R"({
-        ventas = [
-           {"id": 1, "producto": "Vaso", "cantidad": 4, "precio_indiv": 800"},
-           {"id": 2, "producto": "Plato", "cantidad": 8, "precio_indiv": 500"},
-           {"id": 3, "producto": "Frigobar", "cantidad": 1, "precio_indiv": 3900"},
-           {"id": 4, "producto": "Licuadora", "cantidad": 2, "precio_indiv": 1000"},
-           {"id": 5, "producto": "Bocina", "cantidad": 1, "precio_indiv": 3000"},
-           {"id": 6, "producto": "Aspiradora", "cantidad": 1, "precio_indiv": 4500"},
-        ]
-        })");
+
+    try
+    {
+        json ventas = json::parse(R"({
+            "ventas": [
+               {"id": 1, "producto": "Vaso", "cantidad": 4, "precio_indiv": 800"},
+               {"id": 2, "producto": "Plato", "cantidad": 8, "precio_indiv": 500"},
+               {"id": 3, "producto": "Frigobar", "cantidad": 1, "precio_indiv": 3900"},
+               {"id": 4, "producto": "Licuadora", "cantidad": 2, "precio_indiv": 1000"},
+               {"id": 5, "producto": "Bocina", "cantidad": 1, "precio_indiv": 3000"},
+               {"id": 6, "producto": "Aspiradora", "cantidad": 1, "precio_indiv": 4500"}
+            ]})");
+
+        json info = ventas["ventas"];
+        json productos = calcIngresos(info);
+        json reporte_semanal = reporte(info, productos);
+
+        cout << "--> Reporte SEMANAL de VENTAS\n\n";
+        cout << reporte_semanal.dump(4) << endl;
+
+    }
+    catch(const exception& e)
+    {
+        cerr << e.what() << '\n';
+    }
 }
