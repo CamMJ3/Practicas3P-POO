@@ -68,7 +68,30 @@ json mayorIngreso(const json& productos)
     return mayor;
 }
 
-json reporte(const json& ventas, const json& productos);
+void reporte(const json& ventas, const json& productos)
+{
+    int total_semanal = 0;
+    int unidades_total = 0;
+
+    for (const auto& producto : productos)
+    {
+        total_semanal += producto["ganancia.total"];
+        unidades_total += producto["cantidad"];
+    }
+
+    json mayor = mayorIngreso(productos);
+    json menor = menorIngreso(productos);
+
+    json reporte =
+    {
+        {"total_ventas", ventas.size()},
+        {"unidades_total", unidades_total},
+        {"total_semanal", total_semanal},
+        {"producto_mas_ingreso", mayor},
+        {"producto_menos_ingreso", menor},
+        {"productos", productos}
+    };
+}
 
 int main()
 {
