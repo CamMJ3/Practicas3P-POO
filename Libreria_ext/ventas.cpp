@@ -80,7 +80,7 @@ json reporte(const json& ventas, const json& productos)
 
     for (const auto& producto : productos)
     {
-        total_semanal += producto["ganancia.total"].get<int>();
+        total_semanal += producto["ganancia_total"].get<int>();
         unidades_total += producto["cantidad"].get<int>();
     }
 
@@ -109,21 +109,27 @@ int main()
     {
         json ventas = json::parse(R"({
             "ventas": [
-               {"id": 1, "producto": "Vaso", "cantidad": 4, "precio_indiv": 800"},
-               {"id": 2, "producto": "Plato", "cantidad": 8, "precio_indiv": 500"},
-               {"id": 3, "producto": "Frigobar", "cantidad": 1, "precio_indiv": 3900"},
-               {"id": 4, "producto": "Licuadora", "cantidad": 2, "precio_indiv": 1000"},
-               {"id": 5, "producto": "Bocina", "cantidad": 1, "precio_indiv": 3000"},
-               {"id": 6, "producto": "Aspiradora", "cantidad": 1, "precio_indiv": 4500"}
+               {"id": 1, "producto": "Vaso", "cantidad": 4, "precio_indiv": 800},
+               {"id": 2, "producto": "Plato", "cantidad": 8, "precio_indiv": 500},
+               {"id": 3, "producto": "Frigobar", "cantidad": 1, "precio_indiv": 3900},
+               {"id": 4, "producto": "Licuadora", "cantidad": 2, "precio_indiv": 1000},
+               {"id": 5, "producto": "Bocina", "cantidad": 1, "precio_indiv": 3000},
+               {"id": 6, "producto": "Aspiradora", "cantidad": 1, "precio_indiv": 4500}
             ]})");
 
         json info = ventas["ventas"];
         json productos = calcIngresos(info);
         json reporte_semanal = reporte(info, productos);
 
-        cout << "--> Reporte SEMANAL de VENTAS\n\n";
+        cout << "--> Reporte SEMANAL de VENTAS en formato JSON.\n\n";
         cout << reporte_semanal.dump(4) << endl;
 
+        cout <<  "--> Reporte SEMANAL de VENTAS en formato legible.\n\n";
+        cout << "Total de ventas = " << reporte_semanal["total_ventas"] << endl;
+        cout << "Total de unidades vendidas = " << reporte_semanal["unidades_total"] << endl;
+        cout << "Ganancia total = " << reporte_semanal["total_semanal"] << endl;
+        cout << "Producto con mayor ingreso = " << reporte_semanal["producto_mas_ingreso"]["nombre"].get<string>() << endl;
+        cout << "Producto con menor ingreso = " << reporte_semanal["producto_menos_ingreso"]["nombre"].get<string>() << endl;
     }
     catch(const exception& e)
     {
