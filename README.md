@@ -19,22 +19,6 @@ Los ejercicios están organizados en directorios independientes, cada uno con su
 
 ---
 
-## 📋 Contenido
-
-1. [Estructura del proyecto](#-estructura-del-proyecto)
-2. [Requisitos](#-requisitos)
-3. [Ejercicios desarrollados](#-ejercicios-desarrollados)
-   - [1. Validación con excepciones](#1-validación-con-excepciones)
-   - [2. Manejo de archivos de texto](#2-manejo-de-archivos-de-texto)
-   - [3. Conexión a base de datos SQLite](#3-conexión-a-base-de-datos-sqlite)
-   - [4. Uso de una librería externa](#4-uso-de-una-librería-externa)
-   - [5. Integración con manejo de errores](#5-integración-con-manejo-de-errores)
-4. [Configuración y compilación](#-configuración-y-compilación)
-5. [Ejecución individual de los ejercicios](#-ejecución-individual-de-los-ejercicios)
-6. [Tecnologías utilizadas](#-tecnologías-utilizadas)
-
----
-
 ## 📁 Estructura del proyecto
 
 ```text
