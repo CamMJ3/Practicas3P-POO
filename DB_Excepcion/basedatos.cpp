@@ -133,7 +133,33 @@ class ConsultasDAO
                 cout << "--> Nombre: " << text_nombre << endl;
                 cout << "--> Precio: " << precio << endl;
                 cout << "--> Cantidad: " << cantidad << "\n\n";
+            }
 
+            string mensaje = sqlite3_errmsg(db);
+            sqlite3_finalize(instruccion);
+
+            if (ejecucion != SQLITE_DONE)
+            {
+                throw runtime_error("ERROR al consultar: " + mensaje);
             }
         }
 };
+
+int main()
+{
+    try
+    {
+        ConsultasDAO base("tienda.db");
+        base.crearTabla();
+
+        base.insertar("Lavadora", 5000.00, 1);
+        base.insertar("Refrigerador", 25500.00, 2);
+        base.insertar("Trapeador", 100.00, 4);
+
+        base.consultar();
+    }
+    catch (const exception& e)
+    {
+        cerr << e.what() << '\n';
+    }
+}
