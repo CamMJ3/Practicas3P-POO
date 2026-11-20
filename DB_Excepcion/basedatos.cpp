@@ -29,7 +29,7 @@ class ConsultasDAO
                 throw runtime_error("ERROR: " + mensaje);
             }
 
-            cout << "\n--> Conexión EXITOSA.";
+            cout << "\n--> Conexión EXITOSA.\n";
         }
 
         ~ConsultasDAO()
@@ -37,7 +37,7 @@ class ConsultasDAO
             if (db != nullptr)
             {
                 sqlite3_close(db);
-                cout << "\n--> Conexión CERRADA.";
+                cout << "\n--> Conexión CERRADA.\n";
 
             }
         }
@@ -70,7 +70,7 @@ class ConsultasDAO
             )";
 
             ejecutar(tabla);
-            cout << "--> Se ha CREADO la tabla.";
+            cout << "\n--> Se ha CREADO la tabla.\n";
         }
 
         void insertar(const string& nombre, double precio, int cantidad)
@@ -101,7 +101,7 @@ class ConsultasDAO
                 throw runtime_error("ERROR al insertar: " + mensaje);
             }
 
-            cout << "--> Producto " << nombre << " insertado exitosamente.\n";
+            cout << "\n--> Producto " << nombre << " insertado exitosamente.\n";
         }
 
         void consultar()
@@ -147,6 +147,9 @@ class ConsultasDAO
 
 int main()
 {
+    SetConsoleOutputCP(CP_UTF8);
+    SetConsoleCP(CP_UTF8);
+    
     try
     {
         ConsultasDAO base("tienda.db");
