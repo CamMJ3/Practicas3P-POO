@@ -4,6 +4,13 @@
 #include <regex>
 #include <stdexcept>
 
+// IMPORTANTE : El presente archivo pertenece al problema 1.
+
+/** 
+ * @file 
+ * @brief Implementación de la libreria "string" para validar la edad con stoi(), y la libreria "regex" para validar el correo.
+ */
+
 using namespace std;
 
 int validarEdad(const string& num)

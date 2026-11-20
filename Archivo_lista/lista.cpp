@@ -5,6 +5,15 @@
 #include <vector>
 #include <stdexcept>
 
+// IMPORTANTE : El presente archivo pertenece al problema 2.
+
+/** 
+ * @file 
+ * @brief Implementación de la libreria "fstream" para guardar y leer la lista de deberes en pendientes.txt, la libreria "vector" para
+ * almacenar la lista de deberes, y la libreria "stdexcept" para manejar excepciones.
+ */
+
+
 using namespace std;
 
 void guardarTareas(const vector<string>& deberes)

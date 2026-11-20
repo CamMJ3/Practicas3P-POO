@@ -4,6 +4,15 @@
 #include <string>
 #include <stdexcept>
 
+
+// IMPORTANTE : El presente archivo pertenece al problema 3 y 5.
+
+/** 
+ * @file 
+ * @brief Implementación de la libreria "stdexcept" para manejar excepciones, y la libreria "sqlite3.h" para las operaciones de conectividad con la base de datos SQLite.
+ */
+
+
 using namespace std;
 
 class ConsultasDAO

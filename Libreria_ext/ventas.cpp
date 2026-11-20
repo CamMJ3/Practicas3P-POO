@@ -5,6 +5,15 @@
 #include <stdexcept>
 #include <nlohmann/json.hpp>
 
+
+// IMPORTANTE : El presente archivo pertenece al problema 4.
+
+/** 
+ * @file 
+ * @brief Implementación de la libreria "stdexcept" para manejar excepciones, y la libreria "nhlohmann/json.hpp" para las operaciones con objetos JSON.
+ */
+
+
 using namespace std;
 using json = nlohmann::json;
 
