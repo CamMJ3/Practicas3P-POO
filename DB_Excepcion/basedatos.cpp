@@ -70,6 +70,70 @@ class ConsultasDAO
             )";
 
             ejecutar(tabla);
-            cout << "--> Se ha creado la tabla.";
+            cout << "--> Se ha CREADO la tabla.";
+        }
+
+        void insertar(const string& nombre, double precio, int cantidad)
+        {
+            string sql = R"(
+            INSERT OR IGNORE INTO productos (nombre, precio, cantidad)
+            VALUES(?, ?, ?);
+            )";
+
+            sqlite3_stmt* instruccion = nullptr;
+            int ejecucion = sqlite3_prepare_v2(db, sql.c_str(), -1, &instruccion, nullptr);
+
+            if (ejecucion != SQLITE_OK)
+            {
+                throw runtime_error("ERROR al preparar consulta: " + string(sqlite3_errmsg(db)));
+            }
+
+            sqlite3_bind_text(instruccion, 1, nombre.c_str(), -1, SQLITE_TRANSIENT);
+            sqlite3_bind_double(instruccion, 2, precio);
+            sqlite3_bind_int(instruccion, 3, cantidad);
+
+            ejecucion = sqlite3_step(instruccion);
+            string mensaje = sqlite3_errmsg(db);
+            sqlite3_finalize(instruccion);
+
+            if (ejecucion != SQLITE_DONE)
+            {
+                throw runtime_error("ERROR al insertar: " + mensaje);
+            }
+
+            cout << "--> Producto " << nombre << " insertado exitosamente.\n";
+        }
+
+        void consultar()
+        {
+            string sql = R"(
+            SELECT *
+            FROM productos;
+            )";
+
+            sqlite3_stmt* instruccion = nullptr;
+
+            int ejecucion = sqlite3_prepare_v2(db, sql.c_str(), -1, &instruccion, nullptr);
+
+            if (ejecucion != SQLITE_OK)
+            {
+                throw runtime_error("ERROR al preparar consulta: " + string(sqlite3_errmsg(db)));
+            }
+
+            cout << "\n---- PRODUCTOS ----\n\n";
+            while((ejecucion = sqlite3_step(instruccion)) == SQLITE_ROW)
+            {
+                int id = sqlite3_column_int(instruccion, 0);
+                const unsigned char* nombre = sqlite3_column_text(instruccion, 1);
+                double precio = sqlite3_column_double(instruccion, 2);
+                int cantidad = sqlite3_column_int(instruccion, 3);
+
+                string text_nombre = nombre ? reinterpret_cast<const char*>(nombre) : "";
+                cout << "--> ID: " << id << endl;
+                cout << "--> Nombre: " << text_nombre << endl;
+                cout << "--> Precio: " << precio << endl;
+                cout << "--> Cantidad: " << cantidad << "\n\n";
+
+            }
         }
 };
