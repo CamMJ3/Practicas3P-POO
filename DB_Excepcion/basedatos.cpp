@@ -169,6 +169,8 @@ int main()
         base.insertar("Trapeador", 100.00, 4);
 
         base.consultar();
+
+        ConsultasDAO base2("Z:/ruta_inexistente/tienda.db");
     }
     catch (const exception& e)
     {
